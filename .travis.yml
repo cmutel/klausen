@@ -30,8 +30,8 @@ before_install:
     fi
 install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      conda create -n test-environment python=$TRAVIS_PYTHON_VERSION stats_arrays pytest pytest-cov coveralls;
-      source activate test-environment;
+      conda create -n test-environment python=$TRAVIS_PYTHON_VERSION scipy numpy stats_arrays pytest pytest-cov coveralls;
+      conda activate test-environment;
       pip3 install -e .;
     else
       pip3 install -r ci/macos-travis.txt;
