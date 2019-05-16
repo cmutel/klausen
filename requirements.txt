@@ -1,0 +1,3 @@
+numpy
+scipy
+stats_arrays>=0.6
