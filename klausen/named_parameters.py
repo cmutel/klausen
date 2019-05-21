@@ -9,6 +9,7 @@ class NamedParameters(Mapping):
         self.data = {}
         self.metadata = {}
         self.values = {}
+        self.iterations = None
         if params:
             self.add_parameters(params)
 
@@ -50,9 +51,11 @@ class NamedParameters(Mapping):
                        if self.data[key].get('kind') in ('distribution', None)])
         self.values = {key: self._get_amount(self.data[key])
                        for key in keys}
+        self.iterations = None
 
     def stochastic(self, iterations=1000):
         # Stats_arrays parameters
+        self.iterations = iterations
         keys = sorted([key for key in self.data
                        if self.data[key].get('kind') in ('distribution', None)])
         array = sa.UncertaintyBase.from_dicts(*[self.data[key] for key in keys])
